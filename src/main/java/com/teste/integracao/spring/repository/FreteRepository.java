@@ -9,7 +9,7 @@ public interface FreteRepository extends JpaRepository<Frete, Integer> {
     @Override
     List<Frete> findAll();
 
-    Frete findById(Iterable<Integer> codigo_frete);
+    //Frete findById(Iterable<Integer> codigo_frete);
 
     //List<Frete> findByCidade();
 }
