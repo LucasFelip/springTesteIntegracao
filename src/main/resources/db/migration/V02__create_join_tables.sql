@@ -1,6 +1,6 @@
 -- cidade and fretes
 CREATE TABLE cidade_fretes (
-  ` codigo_frete` INT NOT NULL,
+  `codigo_frete` INT NOT NULL,
    codigo_cidade INT NOT NULL
 );
 
@@ -12,7 +12,7 @@ ALTER TABLE cidade_fretes ADD CONSTRAINT fk_cidfre_on_frete FOREIGN KEY (codigo_
 
 -- cliente and fretes
 CREATE TABLE cliente_fretes (
-  ` codigo_frete` INT NOT NULL,
+  `codigo_frete` INT NOT NULL,
    codigo_cliente INT NOT NULL
 );
 
