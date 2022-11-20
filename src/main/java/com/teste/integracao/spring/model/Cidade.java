@@ -14,21 +14,21 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Cliente {
+public class Cidade {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "codigo_cliente")
+    @Column(name = "codigo_cidade")
     private Integer id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable (joinColumns = @JoinColumn (name = "codigo_cliente"), inverseJoinColumns = @JoinColumn (name =" codigo_frete"))
+    @JoinTable (joinColumns = @JoinColumn (name = "codigo_cidade"), inverseJoinColumns = @JoinColumn (name =" codigo_frete"))
     private List<Frete> fretes;
 
     @Size(max = 30)
     private String nome;
 
-    @Size(max = 30)
-    private String telefone;
+    @Size(max = 2)
+    private String uf;
 
-    @Size(max = 30)
-    private String endereco;
+    @Size(max = 4)
+    private float taxa;
 }
