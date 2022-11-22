@@ -1,5 +1,5 @@
 CREATE TABLE cidade (
-  codigo_cidade INT NOT NULL,
+  codigo_cidade INT NOT NULL AUTO_INCREMENT,
    nome VARCHAR(30) NULL,
    uf VARCHAR(2) NULL,
    taxa FLOAT NOT NULL,
