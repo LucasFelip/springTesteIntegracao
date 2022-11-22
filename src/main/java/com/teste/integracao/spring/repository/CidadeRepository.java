@@ -13,4 +13,5 @@ public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
     Cidade findByFretes_Id(Integer id);
 
     List<Cidade> findByUf(String uf);
+
 }
