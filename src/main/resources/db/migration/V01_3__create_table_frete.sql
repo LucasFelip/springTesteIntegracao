@@ -1,5 +1,5 @@
 CREATE TABLE frete (
-  codigo_frete INT NOT NULL,
+  codigo_frete INT NOT NULL AUTO_INCREMENT,
    codigo_cliente INT NULL,
    codigo_cidade INT NULL,
    descricao VARCHAR(30) NULL,
