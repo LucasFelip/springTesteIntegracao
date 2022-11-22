@@ -15,12 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class Cliente {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_cliente")
     private Integer id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable (joinColumns = @JoinColumn (name = "codigo_cliente"), inverseJoinColumns = @JoinColumn (name =" codigo_frete"))
+    @JoinTable (joinColumns = @JoinColumn (name = "codigo_cliente"), inverseJoinColumns = @JoinColumn (name = "codigo_frete"))
     private List<Frete> fretes;
 
     @Size(max = 30)
