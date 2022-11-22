@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @ToString
 public class Frete {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_frete")
     private Integer id;
 

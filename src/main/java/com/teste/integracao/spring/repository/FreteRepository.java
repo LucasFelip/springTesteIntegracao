@@ -16,5 +16,7 @@ public interface FreteRepository extends JpaRepository<Frete, Integer> {
 
     List<Frete> findByCliente_Id(Integer id);
 
+    List<Frete> findByCliente_IdOrderByValcrAsc(Integer id);
+
     List<Frete> findByCidade_Id(Integer id);
 }
