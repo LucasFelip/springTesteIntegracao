@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface FreteRepository extends JpaRepository<Frete, Integer> {
     @Override
     List<Frete> findAll();
-
+    
     @Override
     Optional<Frete> findById(Integer integer);
 
