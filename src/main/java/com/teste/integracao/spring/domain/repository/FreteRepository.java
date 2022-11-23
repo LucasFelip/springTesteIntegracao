@@ -1,8 +1,7 @@
-package com.teste.integracao.spring.repository;
+package com.teste.integracao.spring.domain.repository;
 
-import com.teste.integracao.spring.model.Frete;
+import com.teste.integracao.spring.domain.model.Frete;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

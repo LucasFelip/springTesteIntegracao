@@ -1,7 +1,7 @@
-package com.teste.integracao.spring.service;
+package com.teste.integracao.spring.domain.service;
 
-import com.teste.integracao.spring.model.Cliente;
-import com.teste.integracao.spring.repository.ClienteRepository;
+import com.teste.integracao.spring.domain.model.Cidade;
+import com.teste.integracao.spring.domain.repository.CidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,35 +10,38 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClienteService {
+public class CidadeService {
     @Autowired
-    private final ClienteRepository repository;
+    private final CidadeRepository repository;
 
-    public ClienteService(ClienteRepository repository) {
+    public CidadeService(CidadeRepository repository) {
         this.repository = repository;
     }
 
-    public List<Cliente> todos() {
+    public List<Cidade> todos() {
         return repository.findAll();
     }
 
-    public Optional<Cliente> buscaPor(Integer id) {
+    public Optional<Cidade> buscaPor(Integer id) {
         return repository.findById(id);
     }
 
-    public List<Cliente> buscaPor(String nome) {
+    public List<Cidade> buscaPor(String nome) {
         return repository.findByNomeContaining(nome);
     }
 
-    public Cliente buscarPorFretes_Id(Integer id) {
+    public List<Cidade> buscarPorUf(String uf) {
+        return repository.findByUf(uf);
+    }
+
+    public  Cidade buscarPorFrete_id(Integer id) {
         return repository.findByFretes_Id(id);
     }
 
     @Transactional
-    public Cliente salva(Cliente cliente) {
+    public Cidade salva(Cidade cliente) {
         return repository.save(cliente);
     }
-
 
     @Transactional
     public void removePelo(Integer id) {
