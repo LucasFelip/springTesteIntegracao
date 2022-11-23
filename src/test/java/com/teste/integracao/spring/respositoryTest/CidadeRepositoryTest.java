@@ -1,9 +1,8 @@
-package com.teste.integracao.spring.respository;
+package com.teste.integracao.spring.respositoryTest;
 
-import com.teste.integracao.spring.repository.CidadeRepository;
+import com.teste.integracao.spring.domain.repository.CidadeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.jdbc.Sql;
 
 public class CidadeRepositoryTest {
     private CidadeRepository repository;

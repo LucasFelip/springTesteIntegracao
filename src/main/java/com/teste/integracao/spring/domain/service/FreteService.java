@@ -1,7 +1,7 @@
-package com.teste.integracao.spring.service;
+package com.teste.integracao.spring.domain.service;
 
-import com.teste.integracao.spring.model.Frete;
-import com.teste.integracao.spring.repository.FreteRepository;
+import com.teste.integracao.spring.domain.repository.FreteRepository;
+import com.teste.integracao.spring.domain.model.Frete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

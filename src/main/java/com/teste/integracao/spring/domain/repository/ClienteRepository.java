@@ -1,6 +1,6 @@
-package com.teste.integracao.spring.repository;
+package com.teste.integracao.spring.domain.repository;
 
-import com.teste.integracao.spring.model.Cliente;
+import com.teste.integracao.spring.domain.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

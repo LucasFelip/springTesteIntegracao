@@ -1,4 +1,4 @@
-package com.teste.integracao.spring.model;
+package com.teste.integracao.spring.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
