@@ -1,10 +1,12 @@
 package com.teste.integracao.spring.domain.service;
 
+import com.teste.integracao.spring.domain.model.Cidade;
 import com.teste.integracao.spring.domain.repository.FreteRepository;
 import com.teste.integracao.spring.domain.model.Frete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,5 +37,15 @@ public class FreteService {
 
     public List<Frete> buscarPorCliente_IdOrderByValcrAsc(Integer id) {
         return repository.findByCliente_IdOrderByValcrAsc(id);
+    }
+
+    @Transactional
+    public Frete salva(Frete frete) {
+        return repository.save(frete);
+    }
+
+    @Transactional
+    public void removePelo(Integer id) {
+        repository.deleteById(id);
     }
 }
