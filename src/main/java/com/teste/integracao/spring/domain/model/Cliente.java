@@ -19,8 +19,7 @@ public class Cliente {
     @Column(name = "codigo_cliente")
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable (joinColumns = @JoinColumn (name = "codigo_cliente"), inverseJoinColumns = @JoinColumn (name = "codigo_frete"))
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Frete> fretes;
 
     @Size(max = 30)

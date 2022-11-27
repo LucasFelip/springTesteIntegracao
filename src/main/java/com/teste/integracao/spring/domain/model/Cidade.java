@@ -19,8 +19,7 @@ public class Cidade {
     @Column(name = "codigo_cidade")
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable (joinColumns = @JoinColumn (name = "codigo_cidade"), inverseJoinColumns = @JoinColumn (name = "codigo_frete"))
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cidade")
     private List<Frete> fretes;
 
     @Size(max = 30)
