@@ -1,6 +1,7 @@
 package com.teste.integracao.spring.domain.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -19,8 +21,7 @@ public class Cliente {
     @Column(name = "codigo_cliente")
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable (joinColumns = @JoinColumn (name = "codigo_cliente"), inverseJoinColumns = @JoinColumn (name = "codigo_frete"))
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Frete> fretes;
 
     @Size(max = 30)

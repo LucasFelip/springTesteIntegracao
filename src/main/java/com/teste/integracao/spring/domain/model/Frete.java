@@ -1,6 +1,7 @@
 package com.teste.integracao.spring.domain.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
