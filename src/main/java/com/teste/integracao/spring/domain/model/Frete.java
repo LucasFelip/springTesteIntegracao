@@ -31,9 +31,9 @@ public class Frete {
     @Size(max = 30)
     private String descricao;
 
-    @Size(max = 4)
+    //@Size(max = 4)
     private float peso;
 
-    @Size(max = 4)
+    //@Size(max = 4)
     private float valcr;
 }
