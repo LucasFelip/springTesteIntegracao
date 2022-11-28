@@ -1,14 +1,15 @@
 package com.teste.integracao.spring.domain.service;
 
-import com.teste.integracao.spring.domain.model.Cidade;
-import com.teste.integracao.spring.domain.repository.FreteRepository;
-import com.teste.integracao.spring.domain.model.Frete;
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import com.teste.integracao.spring.domain.model.Frete;
+import com.teste.integracao.spring.domain.repository.FreteRepository;
 
 @Service
 public class FreteService {
