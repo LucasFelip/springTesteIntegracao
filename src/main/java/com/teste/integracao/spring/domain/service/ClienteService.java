@@ -12,11 +12,7 @@ import java.util.Optional;
 @Service
 public class ClienteService {
     @Autowired
-    private final ClienteRepository repository;
-
-    public ClienteService(ClienteRepository repository) {
-        this.repository = repository;
-    }
+    private ClienteRepository repository;
 
     public List<Cliente> todos() {
         return repository.findAll();
