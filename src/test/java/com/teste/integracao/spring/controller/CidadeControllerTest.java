@@ -1,48 +1,79 @@
 package com.teste.integracao.spring.controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.teste.integracao.spring.domain.repository.CidadeRepository;
+import com.teste.integracao.spring.domain.model.Cidade;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import com.teste.integracao.spring.domain.model.Cidade;
-import org.springframework.test.web.servlet.MockMvc;
+import java.net.URI;
+import java.util.List;
 
-@WebMvcTest(CidadeController.class)
-public class CidadeControllerTest {
-    @MockBean
-    private CidadeRepository repository;
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest (webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class CidadeControllerTest {
+    @Autowired
+    private TestRestTemplate testRestTemplate;
 
     @Autowired
-	private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+    private CidadeController controller;
 
     @Test
-    void deveSalvarCidade() throws Exception {
+    void deveListarTodasCidades() {
+        ResponseEntity<List<Cidade>> response = controller.todos();
+        System.out.println("######## " + response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void deveBuscarCidadePorId() {
+        int expectedId = 1;
+        ResponseEntity<Cidade> response = controller.buscaPor(expectedId);
+        System.out.println("######## " + response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void deveBuscarCidadePorNome() {
+        String nome = "Recife";
+        ResponseEntity<List<Cidade>> response = controller.buscaPor(nome);
+        System.out.println("######## " + response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void deveBuscarCidadePorUf() {
+        String uf = "MA";
+        ResponseEntity<List<Cidade>> response = controller.buscaPorUf(uf);
+        System.out.println("######## " + response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void deveBuscarCidadePorFrete_id() {
+        int expectedId = 1;
+        ResponseEntity<Cidade> response = controller.buscarPorFrete_id(expectedId);
+        System.out.println("######## " + response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void deveSalvarCidade(){
         Cidade cidade = Cidade.builder().nome("Null City").taxa(10).build();
 
-        mockMvc.perform(post("/cidades").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsBytes(cidade)))
-                .andExpect(status().isCreated())
-                .andDo(print());
-/*
-        HttpEntity<Cidade> httpEntity = new HttpEntity<Cidade>(cidade);
+        ResponseEntity<Cidade> response = controller.salva(cidade, UriComponentsBuilder.fromUri(URI.create("/cidades/inserir/")));
+        System.out.println("######## " + response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
 
-        ResponseEntity<Cidade> resposta = testRestTemplate.exchange(
-            "/cidades", HttpMethod.POST, httpEntity, Cidade.class
-        );
-
-        assertEquals(HttpStatus.CREATED, resposta.getStatusCode());*/
+    @Test
+    void deveRemoverCidadePorId(){
+        int expectedId = 1;
+        ResponseEntity<?> response = controller.delete(expectedId);
+        System.out.println("######## " + response.getStatusCode());
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 }
