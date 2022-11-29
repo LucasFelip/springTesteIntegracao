@@ -25,7 +25,7 @@ public class CidadeController {
     @Autowired
     private CidadeService service;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Cidade>> todos() {
         var cidades = service.todos();
 
@@ -80,7 +80,7 @@ public class CidadeController {
 
         var cidadeSalva = service.salva(cidade);
         URI uri = (URIBuilder
-            .path("cidades/{id}")
+            .path("cidades/inserir/{id}")
             .buildAndExpand(cidadeSalva.getId())
             .toUri()
         );
