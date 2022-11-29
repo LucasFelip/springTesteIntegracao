@@ -14,11 +14,7 @@ import com.teste.integracao.spring.domain.repository.FreteRepository;
 @Service
 public class FreteService {
     @Autowired
-    private final FreteRepository repository;
-
-    public FreteService(FreteRepository repository) {
-        this.repository = repository;
-    }
+    private FreteRepository repository;
 
     public List<Frete> todos() {
         return repository.findAll();

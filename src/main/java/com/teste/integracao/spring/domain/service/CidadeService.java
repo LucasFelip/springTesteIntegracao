@@ -12,11 +12,7 @@ import java.util.Optional;
 @Service
 public class CidadeService {
     @Autowired
-    private final CidadeRepository repository;
-
-    public CidadeService(CidadeRepository repository) {
-        this.repository = repository;
-    }
+    private CidadeRepository repository;
 
     public List<Cidade> todos() {
         return repository.findAll();
