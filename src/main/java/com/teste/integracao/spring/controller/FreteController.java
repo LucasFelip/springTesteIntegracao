@@ -14,11 +14,7 @@ import java.net.URI;
 @RequestMapping("/fretes")
 public class FreteController {
     @Autowired
-    private final FreteService service;
-
-    public FreteController(FreteService service) {
-        this.service = service;
-    }
+    private FreteService service;
 
     @GetMapping
     public ResponseEntity<Frete> listarTodos(){

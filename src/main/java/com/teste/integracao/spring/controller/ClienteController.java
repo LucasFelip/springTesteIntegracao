@@ -15,11 +15,7 @@ import java.util.Optional;
 @RequestMapping("/clientes")
 public class ClienteController {
     @Autowired
-    private final ClienteService service;
-
-    public ClienteController(ClienteService service) {
-        this.service = service;
-    }
+    private ClienteService service;
 
     @GetMapping
     public ResponseEntity<Cliente> listarTodos(){

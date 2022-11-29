@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +19,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.teste.integracao.spring.domain.model.Cidade;
 import com.teste.integracao.spring.domain.service.CidadeService;
 
-import lombok.AllArgsConstructor;
-
 @RestController
-@AllArgsConstructor
 @RequestMapping("/cidades")
 public class CidadeController {
-    
-    private final CidadeService service;
+    @Autowired
+    private CidadeService service;
 
     @GetMapping
     public ResponseEntity<List<Cidade>> todos() {
