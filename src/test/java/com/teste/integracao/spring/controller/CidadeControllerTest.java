@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Transactional
 @SpringBootTest (webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CidadeControllerTest {
     @Autowired
@@ -30,7 +33,7 @@ class CidadeControllerTest {
 
     @Test
     void deveBuscarCidadePorId() {
-        int expectedId = 1;
+        int expectedId = 2;
         ResponseEntity<Cidade> response = controller.buscaPor(expectedId);
         System.out.println("######## " + response.getStatusCode());
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -62,11 +65,14 @@ class CidadeControllerTest {
 
     @Test
     void deveSalvarCidade(){
-        Cidade cidade = Cidade.builder().nome("Null City").taxa(10).build();
+        Cidade cidade = Cidade.builder().nome("Null City").build();
+        HttpEntity<Cidade> httpEntity = new HttpEntity<>(cidade);
 
-        ResponseEntity<Cidade> response = controller.salva(cidade, UriComponentsBuilder.fromUri(URI.create("/cidades/inserir/")));
-        System.out.println("######## " + response.getStatusCode());
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        ResponseEntity<Cidade> resposta = testRestTemplate.exchange(
+                "/cidades", HttpMethod.POST, httpEntity, Cidade.class
+        );
+        System.out.println("######## " + resposta.getStatusCode());
+        assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
     }
 
     @Test

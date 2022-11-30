@@ -80,7 +80,7 @@ public class CidadeController {
 
         var cidadeSalva = service.salva(cidade);
         URI uri = (URIBuilder
-            .path("cidades/inserir/{id}")
+            .path("cidades/{id}")
             .buildAndExpand(cidadeSalva.getId())
             .toUri()
         );
