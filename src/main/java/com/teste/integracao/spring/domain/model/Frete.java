@@ -21,19 +21,15 @@ public class Frete {
     private Integer id;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "codigo_cliente", referencedColumnName = "codigo_cliente")
     private Cliente cliente;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "codigo_cidade", referencedColumnName = "codigo_cidade")
     private Cidade cidade;
 
     @Size(max = 30)
     private String descricao;
 
-    //@Size(max = 4)
     private float peso;
 
-    //@Size(max = 4)
     private float valcr;
 }

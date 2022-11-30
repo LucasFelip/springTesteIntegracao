@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class Cidade {
     private Integer id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cidade")
-    private List<Frete> fretes;
+    private List<Frete> fretes = new ArrayList<>();
 
     @Size(max = 30)
     private String nome;
