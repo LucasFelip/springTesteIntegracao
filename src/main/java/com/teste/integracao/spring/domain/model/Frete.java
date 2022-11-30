@@ -20,10 +20,12 @@ public class Frete {
     @Column(name = "codigo_frete")
     private Integer id;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne
+    @JoinColumn(name = "codigo_cliente")
     private Cliente cliente;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne
+    @JoinColumn(name = "codigo_cidade")
     private Cidade cidade;
 
     @Size(max = 30)

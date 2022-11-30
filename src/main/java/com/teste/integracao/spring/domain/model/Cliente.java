@@ -22,8 +22,8 @@ public class Cliente {
     @Column(name = "codigo_cliente")
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
-    private List<Frete> fretes = new ArrayList<>();
+    @OneToMany(mappedBy = "cliente")
+    private List<Frete> fretes;
 
     @Size(max = 30)
     private String nome;

@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+
 @Entity
 @Data
 @Builder
@@ -22,8 +24,8 @@ public class Cidade {
     @Column(name = "codigo_cidade")
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cidade")
-    private List<Frete> fretes = new ArrayList<>();
+    @OneToMany(mappedBy = "cidade")
+    private List<Frete> fretes;
 
     @Size(max = 30)
     private String nome;
