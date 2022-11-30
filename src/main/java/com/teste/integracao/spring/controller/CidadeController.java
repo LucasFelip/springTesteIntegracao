@@ -35,7 +35,7 @@ public class CidadeController {
         return ResponseEntity.ok(cidades);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<Cidade> buscaPor(Integer id) {
         var optional = service.buscaPor(id);
         
@@ -45,7 +45,7 @@ public class CidadeController {
         return ResponseEntity.ok(optional.get());
     }
     
-    @GetMapping("/{nome}")
+    @GetMapping("nome/{nome}")
     public ResponseEntity<List<Cidade>> buscaPor(String nome) {
         var cidades = service.buscaPor(nome);
         
@@ -55,7 +55,7 @@ public class CidadeController {
         return ResponseEntity.ok(cidades);
     }
     
-    @GetMapping("/{uf}")
+    @GetMapping("uf/{uf}")
     public ResponseEntity<List<Cidade>> buscaPorUf(String uf) {
         var cidades = service.buscaPor(uf);
         
