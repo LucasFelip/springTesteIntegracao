@@ -3,12 +3,14 @@ package com.teste.integracao.spring.controller;
 import com.teste.integracao.spring.domain.model.Cliente;
 import com.teste.integracao.spring.domain.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 @RestController
@@ -17,7 +19,7 @@ public class ClienteController {
     @Autowired
     private ClienteService service;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<Cliente> listarTodos(){
         var optional = service.todos();
 
@@ -28,7 +30,7 @@ public class ClienteController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Cliente> buscaPor(@PathVariable Integer id) {
         var optional = service.buscaPor(id);
 
@@ -39,7 +41,7 @@ public class ClienteController {
         }
     }
 
-    @GetMapping("/{nome}")
+    @GetMapping("/nome/{nome}")
     public ResponseEntity<Cliente> buscaPor(@PathVariable String nome) {
         var optional = service.buscaPor(nome);
 
@@ -61,33 +63,13 @@ public class ClienteController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Cliente> cadastro(@RequestBody @Valid Cliente cliente,
-                                            UriComponentsBuilder builder) {
-
-        final Cliente clienteSalvo = service.salva(cliente);
-        final URI uri = builder
-                .path("/clientes/{id}")
-                .buildAndExpand(clienteSalvo.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(clienteSalvo );
+    @PostMapping("/inserir")
+    public ResponseEntity<Cliente> cadastro(@RequestBody @Valid Cliente cliente) throws URISyntaxException {
+        var clienteSalvo = service.salva(cliente);
+        return new ResponseEntity<>(clienteSalvo, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualiza(@PathVariable Integer id,
-                                            @RequestBody @Valid Cliente cliente) {
-        Optional<Cliente> optional = service.buscaPor(id);
-
-        if (optional.isPresent()) {
-            cliente.setId(id);
-            Cliente clienteAtualizado = service.salva(cliente);
-            return ResponseEntity.ok(clienteAtualizado);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping("/{id}")
+    @DeleteMapping("remover/{id}")
     public ResponseEntity<?> remover(@PathVariable Integer id) {
         Optional<Cliente> optional = service.buscaPor(id );
 
