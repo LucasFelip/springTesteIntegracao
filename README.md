@@ -14,8 +14,11 @@ Implementação de Testes para uma API REST usando Spring Bootpara um fragmento 
 
 ## 👨‍🎓 Aluno
 Lucas Ferreira - [<img src=https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png width="15" height="15"/> **GitHub**][github.lucas] <br>
+
 Tadeu Viegas - [<img src=https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png width="15" height="15"/> **GitHub**][github.tadeu] <br>
+
 David Gomes - [<img src=https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png width="15" height="15"/> **GitHub**][github.david] <br>
+
 David Alysson - [<img src=https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png width="15" height="15"/> **GitHub**][github.davi] <br>
 
 ## 🔗 Sobre
