@@ -1,5 +1,6 @@
 package com.teste.integracao.spring.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +22,8 @@ public class Cliente {
     @Column(name = "codigo_cliente")
     private Integer id;
 
-    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Frete> fretes;
 
     @Size(max = 30)

@@ -1,5 +1,6 @@
 package com.teste.integracao.spring.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +22,8 @@ public class Cidade {
     @Column(name = "codigo_cidade")
     private Integer id;
 
-    @OneToMany(mappedBy = "cidade")
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cidade")
     private List<Frete> fretes;
 
     @Size(max = 30)

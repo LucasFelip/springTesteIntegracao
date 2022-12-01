@@ -1,5 +1,6 @@
 package com.teste.integracao.spring.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,18 +21,22 @@ public class Frete {
     @Column(name = "codigo_frete")
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "codigo_cliente")
+    @JsonIgnore
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "codigo_cliente", referencedColumnName = "codigo_cliente")
     private Cliente cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "codigo_cidade")
+    @JsonIgnore
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "codigo_cidade", referencedColumnName = "codigo_cidade")
     private Cidade cidade;
 
     @Size(max = 30)
     private String descricao;
 
+    //@Size(max = 4)
     private float peso;
 
+    //@Size(max = 4)
     private float valcr;
 }
