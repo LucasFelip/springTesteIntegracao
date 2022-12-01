@@ -8,12 +8,10 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Transactional
 @SpringBootTest (webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CidadeControllerTest {
     @Autowired
@@ -31,20 +29,19 @@ class CidadeControllerTest {
     }
 
     @Test
-    // java.lang.IllegalArgumentException: The given id must not be null!
-    // sout -> ######## 500 INTERNAL_SERVER_ERROR
     void deveBuscarCidadePorId() {
-        int expectedId = 2;
+        int expectedId = 27;
         ResponseEntity<Cidade> response = testRestTemplate.exchange(
                 "/cidades/id/{id}",HttpMethod.GET,null, Cidade.class, expectedId
         );
+        System.out.println("######## " + response.getBody());
         System.out.println("######## " + response.getStatusCode());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void deveBuscarCidadePorNome() {
-        ParameterizedTypeReference<List<Cidade>> tipoRetorno = new ParameterizedTypeReference<List<Cidade>>() {};
+        ParameterizedTypeReference<List<Cidade>> tipoRetorno = new ParameterizedTypeReference<>() {};
 
         String expectedName = "Recife";
         ResponseEntity<List<Cidade>> response = testRestTemplate.exchange(
@@ -67,8 +64,6 @@ class CidadeControllerTest {
     }
 
     @Test
-    // javax.persistence.NonUniqueResultException: query did not return a unique result: 27
-    // sout -> ######## 500 INTERNAL_SERVER_ERROR
     void deveBuscarCidadePorFrete_id() {
         int expectedId = 1;
         ResponseEntity<Cidade> response = testRestTemplate.exchange(
@@ -80,23 +75,21 @@ class CidadeControllerTest {
 
     @Test
     void deveSalvarCidade(){
-        Cidade cidade = Cidade.builder().nome("Null City").build();
+        Cidade cidade = Cidade.builder().nome("Null City").taxa(10).build();
         HttpEntity<Cidade> httpEntity = new HttpEntity<>(cidade);
 
         ResponseEntity<Cidade> resposta = testRestTemplate.exchange(
-                "/cidades", HttpMethod.POST, httpEntity, Cidade.class
+                "/cidades/inserir/", HttpMethod.POST, httpEntity, Cidade.class
         );
         System.out.println("######## " + resposta.getStatusCode());
         assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
     }
 
     @Test
-    // java.lang.IllegalArgumentException: The given id must not be null!
-    // sout -> ######## 500 INTERNAL_SERVER_ERROR
     void deveRemoverCidadePorId(){
-        int expectedId = 10;
+        int expectedId = 1;
         ResponseEntity<?> resposta = testRestTemplate.exchange(
-                "/cidades/", HttpMethod.DELETE, null, Cidade.class, expectedId
+                "/cidades/remover/{id}", HttpMethod.DELETE, null, Cidade.class, expectedId
         );
         assertEquals(HttpStatus.NO_CONTENT,resposta.getStatusCode());
     }
