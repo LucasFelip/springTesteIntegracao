@@ -5,71 +5,81 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.transaction.Transactional;
-import java.net.URI;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Transactional
 @SpringBootTest (webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CidadeControllerTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    @Autowired
-    private CidadeController controller;
-
     @Test
     void deveListarTodasCidades() {
-        ResponseEntity<List<Cidade>> response = controller.todos();
+        ParameterizedTypeReference<List<Cidade>> tipoRetorno = new ParameterizedTypeReference<List<Cidade>>() {};
+
+        ResponseEntity<List<Cidade>> response = testRestTemplate.exchange(
+                "/cidades/", HttpMethod.GET,null, tipoRetorno
+        );
         System.out.println("######## " + response.getStatusCode());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void deveBuscarCidadePorId() {
-        int expectedId = 2;
-        ResponseEntity<Cidade> response = controller.buscaPor(expectedId);
+        int expectedId = 27;
+        ResponseEntity<Cidade> response = testRestTemplate.exchange(
+                "/cidades/id/{id}",HttpMethod.GET,null, Cidade.class, expectedId
+        );
+        System.out.println("######## " + response.getBody());
         System.out.println("######## " + response.getStatusCode());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void deveBuscarCidadePorNome() {
-        String nome = "Recife";
-        ResponseEntity<List<Cidade>> response = controller.buscaPor(nome);
-        System.out.println("######## " + response.getStatusCode());
+        ParameterizedTypeReference<List<Cidade>> tipoRetorno = new ParameterizedTypeReference<>() {};
+
+        String expectedName = "Recife";
+        ResponseEntity<List<Cidade>> response = testRestTemplate.exchange(
+                "/cidades/nome/{nome}",HttpMethod.GET, null, tipoRetorno,expectedName
+        );
+
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void deveBuscarCidadePorUf() {
-        String uf = "MA";
-        ResponseEntity<List<Cidade>> response = controller.buscaPorUf(uf);
-        System.out.println("######## " + response.getStatusCode());
+        ParameterizedTypeReference<List<Cidade>> tipoRetorno = new ParameterizedTypeReference<List<Cidade>>() {};
+
+        String expectedUf = "MA";
+        ResponseEntity<List<Cidade>> response = testRestTemplate.exchange(
+                "/cidades/uf/{uf}",HttpMethod.GET, null, tipoRetorno,expectedUf
+        );
+
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void deveBuscarCidadePorFrete_id() {
         int expectedId = 1;
-        ResponseEntity<Cidade> response = controller.buscarPorFrete_id(expectedId);
+        ResponseEntity<Cidade> response = testRestTemplate.exchange(
+                "/cidades/frete/{id}",HttpMethod.GET,null, Cidade.class, expectedId
+        );
         System.out.println("######## " + response.getStatusCode());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void deveSalvarCidade(){
-        Cidade cidade = Cidade.builder().nome("Null City").build();
+        Cidade cidade = Cidade.builder().nome("Null City").taxa(10).build();
         HttpEntity<Cidade> httpEntity = new HttpEntity<>(cidade);
 
         ResponseEntity<Cidade> resposta = testRestTemplate.exchange(
-                "/cidades", HttpMethod.POST, httpEntity, Cidade.class
+                "/cidades/inserir/", HttpMethod.POST, httpEntity, Cidade.class
         );
         System.out.println("######## " + resposta.getStatusCode());
         assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
@@ -78,8 +88,9 @@ class CidadeControllerTest {
     @Test
     void deveRemoverCidadePorId(){
         int expectedId = 1;
-        ResponseEntity<?> response = controller.delete(expectedId);
-        System.out.println("######## " + response.getStatusCode());
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        ResponseEntity<?> resposta = testRestTemplate.exchange(
+                "/cidades/remover/{id}", HttpMethod.DELETE, null, Cidade.class, expectedId
+        );
+        assertEquals(HttpStatus.NO_CONTENT,resposta.getStatusCode());
     }
 }

@@ -1,19 +1,16 @@
 package com.teste.integracao.spring.controller;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.teste.integracao.spring.domain.model.Cidade;
@@ -35,8 +32,8 @@ public class CidadeController {
         return ResponseEntity.ok(cidades);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Cidade> buscaPor(Integer id) {
+    @GetMapping("id/{id}")
+    public ResponseEntity<Cidade> buscaPor(@PathVariable Integer id) {
         var optional = service.buscaPor(id);
         
         if(optional.isEmpty()){
@@ -45,8 +42,8 @@ public class CidadeController {
         return ResponseEntity.ok(optional.get());
     }
     
-    @GetMapping("/{nome}")
-    public ResponseEntity<List<Cidade>> buscaPor(String nome) {
+    @GetMapping("nome/{nome}")
+    public ResponseEntity<List<Cidade>> buscaPor(@PathVariable String nome) {
         var cidades = service.buscaPor(nome);
         
         if(cidades.isEmpty()){
@@ -55,9 +52,9 @@ public class CidadeController {
         return ResponseEntity.ok(cidades);
     }
     
-    @GetMapping("/{uf}")
-    public ResponseEntity<List<Cidade>> buscaPorUf(String uf) {
-        var cidades = service.buscaPor(uf);
+    @GetMapping("uf/{uf}")
+    public ResponseEntity<List<Cidade>> buscaPorUf(@PathVariable String uf) {
+        var cidades = service.buscarPorUf(uf);
         
         if(cidades.isEmpty()){
             return ResponseEntity.noContent().build();
@@ -66,7 +63,7 @@ public class CidadeController {
     }
 
     @GetMapping("/frete/{id}")
-    public ResponseEntity<Cidade> buscarPorFrete_id(Integer id){
+    public ResponseEntity<Cidade> buscarPorFrete_id(@PathVariable Integer id){
         var optional = service.buscarPorFrete_id(id);
         
         if(optional == null){
@@ -75,21 +72,14 @@ public class CidadeController {
         return ResponseEntity.ok(optional);
     }
 
-    @PostMapping
-    public ResponseEntity<Cidade> salva(@RequestBody @Valid Cidade cidade, UriComponentsBuilder URIBuilder) {
-
+    @PostMapping("/inserir")
+    public ResponseEntity<Cidade> salva(@RequestBody @Valid Cidade cidade) throws URISyntaxException {
         var cidadeSalva = service.salva(cidade);
-        URI uri = (URIBuilder
-            .path("cidades/{id}")
-            .buildAndExpand(cidadeSalva.getId())
-            .toUri()
-        );
-
-        return ResponseEntity.created(uri).body(cidadeSalva);
+        return new ResponseEntity<>(cidadeSalva, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> delete(Integer id) {
+    @DeleteMapping("/remover/{id}")
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
 
         Optional<Cidade> optional = service.buscaPor(id);
         if(optional.isPresent()){
