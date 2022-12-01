@@ -3,12 +3,14 @@ package com.teste.integracao.spring.controller;
 import com.teste.integracao.spring.domain.model.Frete;
 import com.teste.integracao.spring.domain.service.FreteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/fretes")
@@ -16,7 +18,7 @@ public class FreteController {
     @Autowired
     private FreteService service;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<Frete> listarTodos(){
         var optional = service.todos();
 
@@ -27,7 +29,7 @@ public class FreteController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Frete> buscaPor(@PathVariable Integer id) {
         var optional = service.buscaPor(id);
 
@@ -71,14 +73,10 @@ public class FreteController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Frete> cadastro(@RequestBody @Valid Frete frete, UriComponentsBuilder builder) {
-        final Frete freteSalvo = service.salva(frete);
-        final URI uri = builder
-                .path("/clientes/{id}")
-                .buildAndExpand(freteSalvo.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(freteSalvo);
+    @PostMapping("/inserir")
+    public ResponseEntity<Frete> cadastro(@RequestBody @Valid Frete frete) throws URISyntaxException {
+        var freteSalvo = service.salva(frete);
+        return new ResponseEntity<>(freteSalvo, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -95,7 +93,7 @@ public class FreteController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("remover/{id}")
     public ResponseEntity<?> remover(@PathVariable Integer id) {
         var optional = service.buscaPor(id);
 
