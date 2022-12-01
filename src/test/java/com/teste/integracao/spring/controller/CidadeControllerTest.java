@@ -78,19 +78,19 @@ class CidadeControllerTest {
         Cidade cidade = Cidade.builder().nome("Null City").taxa(10).build();
         HttpEntity<Cidade> httpEntity = new HttpEntity<>(cidade);
 
-        ResponseEntity<Cidade> resposta = testRestTemplate.exchange(
+        ResponseEntity<Cidade> response = testRestTemplate.exchange(
                 "/cidades/inserir/", HttpMethod.POST, httpEntity, Cidade.class
         );
-        System.out.println("######## " + resposta.getStatusCode());
-        assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
+        System.out.println("######## " + response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
     @Test
     void deveRemoverCidadePorId(){
         int expectedId = 1;
-        ResponseEntity<?> resposta = testRestTemplate.exchange(
+        ResponseEntity<?> response = testRestTemplate.exchange(
                 "/cidades/remover/{id}", HttpMethod.DELETE, null, Cidade.class, expectedId
         );
-        assertEquals(HttpStatus.NO_CONTENT,resposta.getStatusCode());
+        assertEquals(HttpStatus.NO_CONTENT,response.getStatusCode());
     }
 }
