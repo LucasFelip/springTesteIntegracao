@@ -14,14 +14,21 @@ Implementação de Testes para uma API REST usando Spring Bootpara um fragmento 
 
 ## 👨‍🎓 Aluno
 Lucas Ferreira - [<img src=https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png width="15" height="15"/> **GitHub**][github.lucas] <br>
-Tadeu Viegas - [<img src=https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png width="15" height="15"/> **GitHub**][github.tadeu]
+Tadeu Viegas - [<img src=https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png width="15" height="15"/> **GitHub**][github.tadeu] <br>
+David Gomes - [<img src=https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png width="15" height="15"/> **GitHub**][github.david] <br>
+David Alysson - [<img src=https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png width="15" height="15"/> **GitHub**][github.davi] <br>
 
 ## 🔗 Sobre
-Atividade 05 - Teste de API desenvolvida com Spring Boot <br>
+[Atividade 05 - Teste de API desenvolvida com Spring Boot][classroom.tarefa] <br>
 Sistemas de Informação - DCOMP/IFMA <br>
-Professor: Joao Carlos Pinheiro <br>
+Professor: Joao Carlos Pinheiro - [<img src=https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png width="15" height="15"/> **GitHub**][github.jcpinheiro]<br>
 Engenharia de Software II
 
+<!-- LINKS DE REFERENCIA -->
 
 [github.lucas]: <https://github.com/LucasFelip>
 [github.tadeu]: <https://github.com/TadeuViegas>
+[github.david]: <https://github.com/DavidGomesh>
+[github.davi]: <https://github.com/DavidAly>
+[github.jcpinheiro]: <https://github.com/jcpinheiro>
+[classroom.tarefa]: <https://classroom.google.com/u/1/c/NTQ1Mjc4NTMzODgx/a/NTM5NjQ0NjQzNzUw/details>
