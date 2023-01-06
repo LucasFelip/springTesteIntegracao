@@ -33,7 +33,7 @@ class FreteControllerTest {
 
     @Test
     void deveBuscarFretePorId() {
-        int expectedId = 2;
+        int expectedId = 1;
         ResponseEntity<Frete> response = testRestTemplate.exchange(
                 "/fretes/id/{id}", HttpMethod.GET,null, Frete.class, expectedId
         );

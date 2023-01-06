@@ -63,7 +63,7 @@ class CidadeControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
-    /*@Test
+    @Test
     void deveBuscarCidadePorFrete_id() {
         int expectedId = 1;
         ResponseEntity<Cidade> response = testRestTemplate.exchange(
@@ -72,7 +72,7 @@ class CidadeControllerTest {
         System.out.println("######## " + response.getStatusCode());
         System.out.println("######## " + response.getBody());
         assertEquals(HttpStatus.OK, response.getStatusCode());
-    }*/
+    }
 
     @Test
     void deveSalvarCidade(){
