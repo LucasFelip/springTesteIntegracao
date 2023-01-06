@@ -1,4 +1,4 @@
-name: projetoIntegracao
+name: CI
 
 on:
   workflow_dispatch:
@@ -34,9 +34,23 @@ jobs:
         distribution: 'microsoft'
         cache: 'maven'
         
-    ## Etapa 3 - Construcao e execucao dos testes
-    - name: Build and run tests
-      run: mvn clean install
+    ## Etapa 3 - Construcao dos testes
+    - name: Build test
+      run: mvn --batch-mode -DskipTests package
+     
+    ## Etapa 4 -  
+    - name: Run test
+      run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
+      
+    ## Etapa 5 - 
+    - name: Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: Maven Tests
+        path: target/surefire-reports/*.xml
+        reporter: java-junit
+        fail-on-error: true
       
   deploy-prod:
     runs-on: ubuntu-latest
