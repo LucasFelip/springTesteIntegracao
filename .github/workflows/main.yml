@@ -2,46 +2,46 @@ name: projetoIntegracao
 
 on:
   workflow_dispatch:
+  
+  #pull_request:
+  #  types: [opened, synchronize, reopened, closed]
+  #  branches:
+  #    - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Run a one-line script
+      run: echo Build init
         
   deploy-dev:
     runs-on: ubuntu-latest
-    environment:
+    environment: 
       name: dev
-      url: 'integracaoci-dev.com'
+      url: 'https://github.com/LucasFelip/springTesteIntegracao'
     needs: build
     steps:
-    - uses: actions/checkout@v3
-    - name: Run a one-line script
-      run: echo Deploy Dev
-    - name: Setup a Java JDK
+    ## Etapa 1 - Criacao da copia do repositorio
+    - name: Checkout Security
+      uses: actions/checkout@v3
+      
+    ## Etapa 2 - Configuração JDK
+    - name: Setup Java JDK
       uses: actions/setup-java@v3
       with:
-        distribution: 'microsoft' # See 'Supported distributions' for available options
         java-version: '17'
-    - run: java HelloWorldApp.java
-    
+        distribution: 'microsoft'
+        cache: 'maven'
+        
+    ## Etapa 3 - Construcao e execucao dos testes
+    - name: Build and run tests
+      run: mvn clean install
       
   deploy-prod:
     runs-on: ubuntu-latest
     environment:
       name: prod
-      url: 'integracaoci.com'
     needs: deploy-dev
     steps:
     - name: Run a one-line script
