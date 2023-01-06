@@ -1,9 +1,7 @@
 name: Tests
 
 on:
-  workflow_dispatch:
-
-  pull_request:
+  push:
     - '**'        # matches every branch
 jobs:
   tests:
