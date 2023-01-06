@@ -3,6 +3,7 @@ package com.teste.integracao.spring.domain.service;
 import com.teste.integracao.spring.domain.model.Frete;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
