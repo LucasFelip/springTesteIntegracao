@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   
   pull_request:
-    types: [opened, synchronize, reopened, closed]
     branches:
       - master
 
@@ -38,11 +37,11 @@ jobs:
     - name: Build test
       run: mvn --batch-mode -DskipTests package
      
-    ## Etapa 4 -  
+    ## Etapa 4 -  Execucao dos Testes
     - name: Run test
       run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
       
-    ## Etapa 5 - 
+    ## Etapa 5 - Relatorio dos testes
     - name: Report
       uses: dorny/test-reporter@v1
       if: always()
