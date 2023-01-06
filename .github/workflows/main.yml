@@ -1,0 +1,40 @@
+name: projetoIntegracao
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+  
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Run a one-line script
+      run: echo Hello world!
+        
+  deploy-dev:
+    runs-on: ubuntu-lastest
+    environment:
+      name: dev
+      url: 'integracaoci.com'
+    needs: build
+    steps:
+    - name: Run a one-line script
+      run: echo Deploy Dev
+      
+  deploy-prod:
+    runs-on: ubuntu-lastest
+    environment:
+      name: prod
+      url: 'integracaoci.com'
+    needs: deploy-dev
+    steps:
+    - name: Run a one-line script
+      run: echo Deploy Prod
