@@ -65,7 +65,7 @@ class CidadeControllerTest {
 
     @Test
     void deveBuscarCidadePorFrete_id() {
-        int expectedId = 1;
+        int expectedId = 2;
         ResponseEntity<Cidade> response = testRestTemplate.exchange(
                 "/cidades/frete/{id}",HttpMethod.GET,null, Cidade.class, expectedId
         );
