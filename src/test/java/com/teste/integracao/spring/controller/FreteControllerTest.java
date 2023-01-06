@@ -37,6 +37,7 @@ class FreteControllerTest {
         ResponseEntity<Frete> response = testRestTemplate.exchange(
                 "/fretes/id/{id}", HttpMethod.GET,null, Frete.class, expectedId
         );
+        System.out.println("######## " + response.getBody());
         System.out.println("######## " + response.getStatusCode());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
