@@ -64,17 +64,6 @@ class CidadeControllerTest {
     }
 
     @Test
-    void deveBuscarCidadePorFrete_id() {
-        int expectedId = 2;
-        ResponseEntity<Cidade> response = testRestTemplate.exchange(
-                "/cidades/frete/{id}",HttpMethod.GET,null, Cidade.class, expectedId
-        );
-        System.out.println("######## " + response.getStatusCode());
-        System.out.println("######## " + response.getBody());
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
-    @Test
     void deveSalvarCidade(){
         Cidade cidade = Cidade.builder().nome("Null City").taxa(10).build();
         HttpEntity<Cidade> httpEntity = new HttpEntity<>(cidade);

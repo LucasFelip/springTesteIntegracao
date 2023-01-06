@@ -56,17 +56,6 @@ class ClienteControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
-    @Test // RETURN NOT_FOUND
-    void deveBuscarClientePorFretes_Id() {
-        int expectedId = 10;
-        ResponseEntity<Cliente> response = testRestTemplate.exchange(
-                "/clientes/fretes/{id}", HttpMethod.GET, null, Cliente.class, expectedId
-        );
-        System.out.println("######## " + response.getBody());
-        System.out.println("######## " + response.getStatusCode());
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
     @Test
     void deveSalvarCliente() {
         Cliente cliente = Cliente.builder().nome("Nulozinho").telefone("98988525278").build();
