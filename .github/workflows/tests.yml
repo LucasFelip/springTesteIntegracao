@@ -2,7 +2,9 @@ name: Tests
 
 on:
   push:
-    - '**'        # matches every branch
+    branches:
+      - '**'        # matches every branch
+
 jobs:
   tests:
     runs-on: ubuntu-latest
