@@ -11,7 +11,7 @@ jobs:
       run: echo Hello world!
         
   deploy-dev:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     environment:
       name: dev
       url: 'integracaoci-dev.com'
@@ -21,7 +21,7 @@ jobs:
       run: echo Deploy Dev
       
   deploy-prod:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     environment:
       name: prod
       url: 'integracaoci.com'
