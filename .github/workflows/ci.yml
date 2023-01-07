@@ -19,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: dev
-      url: 'https://github.com/LucasFelip/springTesteIntegracao'
     needs: build
     steps:
     ## Etapa 1 - Criacao da copia do repositorio
@@ -56,6 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: prod
+      url: 'https://github.com/LucasFelip/springTesteIntegracao'
     needs: deploy-dev
     steps:
     - name: Run a one-line script
